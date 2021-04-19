@@ -1,4 +1,4 @@
-// Schema type的格式
+import { PropType } from 'vue';
 
 export enum SchemaTypes {
   'NUMBER' = 'number',
@@ -44,3 +44,18 @@ export interface Schema {
   allOf?: Schema; // 所有的都需要匹配
   default?: any; // 默认值
 }
+
+export const FieldPropType = {
+  schema: {
+    type: Object as PropType<Schema>,
+    required: true,
+  },
+  value: {
+    type: String as PropType<string>,
+    required: true,
+  },
+  onChange: {
+    type: Function as PropType<(v: any) => void>,
+    required: true,
+  },
+} as const;

@@ -4,6 +4,7 @@ import { toJSONString } from './utils/index';
 import { createUseStyles } from 'vue-jss';
 import { Schema } from './types/type';
 import demos from './demos/index';
+import SchemaForm from '../lib/SchemaForm';
 
 const useStyles = createUseStyles({
   '@global': {
@@ -105,10 +106,6 @@ export default defineComponent({
       dataCode: '',
     });
 
-    const code = {
-      name: 'ssss',
-    };
-
     // watchEffect在初始化的时候就会收集一次依赖
     // 响应式的值发生变化的时候，就会触发watchEffect
     watchEffect(() => {
@@ -167,6 +164,12 @@ export default defineComponent({
     // data-editor 变化时候需要给对应的数据赋值
     const changeDataSchemaCode = (v: string) => changeCode('data', v);
 
+    // SchemaForm 组件 onChange事件
+    const handleOnChange = (value: any) => {
+      demo.data = value;
+      demo.dataCode = toJSONString(value);
+    };
+
     return () => {
       const classes = classRef.value;
       const selectedValue = selectedRef.value;
@@ -215,7 +218,13 @@ export default defineComponent({
                   />
                 </div>
               </div>
-              <div class={classes.formWrapper}>表单区</div>
+              <div class={classes.formWrapper}>
+                <SchemaForm
+                  schema={demo.schema!}
+                  value={demo.data}
+                  onChange={handleOnChange}
+                />
+              </div>
             </div>
           </div>
         </div>
