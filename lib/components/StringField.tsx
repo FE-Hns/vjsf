@@ -1,0 +1,38 @@
+import { defineComponent, ref, watch } from 'vue';
+import { FieldPropType } from '../../src/types/type';
+
+export default defineComponent({
+  name: 'StringField',
+  props: FieldPropType,
+  setup(props) {
+    const handleOnChange = (e: any) => {
+      props.onChange(e.target.value);
+    };
+    // v-model绑定本组件的localValue
+    const localValueRef = ref(props.value);
+
+    // 监听数据
+    watch(localValueRef, (nv, ov) => {
+      console.log(nv, ov, 'kkkkkkk');
+      if (nv !== props.value) {
+        props.onChange(nv);
+      }
+    });
+
+    // 当改变数据源
+    watch(
+      () => props.value,
+      (nv, ov) => {
+        if (nv !== localValueRef.value) {
+          localValueRef.value = nv;
+        }
+      }
+    );
+
+    return () => {
+      // return <input type="text" value={props.value} onInput={handleOnChange} />;
+      // v-model绑定ref.value才会触发
+      return <input type="text" v-model={localValueRef.value} />;
+    };
+  },
+});
