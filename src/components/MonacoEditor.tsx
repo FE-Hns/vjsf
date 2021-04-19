@@ -6,10 +6,10 @@ import {
   ref,
   shallowRef,
   watch,
-} from 'vue'
-import { PropType } from 'vue'
-import * as Monaco from 'monaco-editor'
-import { createUseStyles } from 'vue-jss'
+} from 'vue';
+import { PropType } from 'vue';
+import * as Monaco from 'monaco-editor';
+import { createUseStyles } from 'vue-jss';
 
 const useStyles = createUseStyles({
   container: {
@@ -27,7 +27,7 @@ const useStyles = createUseStyles({
     flexGrow: 1,
     height: 100,
   },
-})
+});
 
 export default defineComponent({
   props: {
@@ -48,12 +48,12 @@ export default defineComponent({
   },
   setup(props) {
     // must be shallowRef, if not, editor.getValue() won't work
-    const containerRef = ref()
-    const editorRef = shallowRef()
-    const classesRef = useStyles()
+    const containerRef = ref();
+    const editorRef = shallowRef();
+    const classesRef = useStyles();
 
-    let _subscription: Monaco.IDisposable | undefined
-    let __prevent_trigger_change_event = false
+    let _subscription: Monaco.IDisposable | undefined;
+    let __prevent_trigger_change_event = false;
 
     onMounted(() => {
       const editor = (editorRef.value = Monaco.editor.create(
@@ -66,30 +66,30 @@ export default defineComponent({
             enabled: false,
           },
         }
-      ))
+      ));
 
       _subscription = editor.onDidChangeModelContent((event) => {
-        console.log('--------->', __prevent_trigger_change_event)
+        console.log('--------->', __prevent_trigger_change_event);
         if (!__prevent_trigger_change_event) {
-          props.onChange(editor.getValue(), event)
+          props.onChange(editor.getValue(), event);
         }
-      })
-    })
+      });
+    });
 
     onBeforeMount(() => {
       if (_subscription) {
-        _subscription.dispose()
+        _subscription.dispose();
       }
-    })
+    });
 
     watch(
       () => props.code,
       (v) => {
-        const editor = editorRef.value
-        const model = editor.getModel()
+        const editor = editorRef.value;
+        const model = editor.getModel();
         if (v !== model.getValue()) {
-          editor.pushUndoStop()
-          __prevent_trigger_change_event = true
+          editor.pushUndoStop();
+          __prevent_trigger_change_event = true;
           // pushEditOperations says it expects a cursorComputer, but doesn't seem to need one.
           model.pushEditOperations(
             [],
@@ -99,18 +99,18 @@ export default defineComponent({
                 text: v,
               },
             ]
-          )
-          editor.pushUndoStop()
-          __prevent_trigger_change_event = false
+          );
+          editor.pushUndoStop();
+          __prevent_trigger_change_event = false;
         }
         // if (v !== editorRef.value.getValue()) {
         //   editorRef.value.setValue(v)
         // }
       }
-    )
+    );
 
     return () => {
-      const classes = classesRef.value
+      const classes = classesRef.value;
       return (
         <div class={classes.container}>
           <div class={classes.title}>
@@ -118,7 +118,7 @@ export default defineComponent({
           </div>
           <div class={classes.code} ref={containerRef}></div>
         </div>
-      )
-    }
+      );
+    };
   },
-})
+});

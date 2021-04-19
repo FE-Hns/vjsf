@@ -1,7 +1,7 @@
-import { defineComponent } from 'vue'
-import MonacoEditor from './components/MonacoEditor'
-import { toJSONString } from './utils/index'
-import { createUseStyles } from 'vue-jss'
+import { defineComponent } from 'vue';
+import MonacoEditor from './components/MonacoEditor';
+import { toJSONString } from './utils/index';
+import { createUseStyles } from 'vue-jss';
 
 const useStyles = createUseStyles({
   '@global': {
@@ -64,23 +64,23 @@ const useStyles = createUseStyles({
   formWrapper: {
     width: 400,
   },
-})
+});
 
 export default defineComponent({
   name: 'App',
   props: {},
   setup(props) {
-    const classRef = useStyles()
+    const classRef = useStyles();
 
     const code = {
       name: 'nnnn',
-    }
+    };
     // editor值变化会获取到编辑器的值
     const onChange = (v: string, e: any) => {
-      console.log(v, e)
-    }
+      console.log(v, e);
+    };
     return () => {
-      const classes = classRef.value
+      const classes = classRef.value;
       return (
         <div>
           <div class={classes.container}>
@@ -119,7 +119,7 @@ export default defineComponent({
             </div>
           </div>
         </div>
-      )
-    }
+      );
+    };
   },
-})
+});
