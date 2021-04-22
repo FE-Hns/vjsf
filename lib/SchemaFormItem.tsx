@@ -1,8 +1,9 @@
 // 根据类型转发
 import { defineComponent } from 'vue';
-import { FieldPropType, SchemaTypes } from '../src/types/type';
+import { FieldPropType, SchemaTypes } from './types/type';
 import StringField from './components/StringField';
 import NumberField from './components/NumberField';
+import ObjectField from './components/ObjectField';
 
 export default defineComponent({
   name: 'SchemaFormItem',
@@ -20,6 +21,10 @@ export default defineComponent({
         }
         case SchemaTypes.NUMBER: {
           Component = NumberField;
+          break;
+        }
+        case SchemaTypes.OBJECT: {
+          Component = ObjectField;
           break;
         }
         default:

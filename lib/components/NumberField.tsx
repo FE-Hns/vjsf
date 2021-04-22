@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import { FieldPropType } from '../../src/types/type';
+import { FieldPropType } from '../types/type';
 
 export default defineComponent({
   name: 'NumberField',

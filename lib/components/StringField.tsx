@@ -1,5 +1,6 @@
-import { defineComponent, ref, watch } from 'vue';
-import { FieldPropType } from '../../src/types/type';
+import { defineComponent, inject, ref, watch, DefineComponent } from 'vue';
+import { FieldPropType } from '../types/type';
+import { SchemaFormItemContextKey } from '../context';
 
 export default defineComponent({
   name: 'StringField',
