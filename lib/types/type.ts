@@ -37,12 +37,15 @@ export interface Schema {
   dependencies?: { [key: string]: string[] | Schema }; // 文档说明已废弃
   propertyNames?: { [key: string]: string }; // 属性名称格式
   enum?: any[]; // 枚举类型
+  enumNames?: any[];
+  enumKeyValue?: any[];
   const?: any; // 固定值
   not?: Schema; // 匹配不是给定的格式
-  oneof?: Schema; // 匹配给定的格式
-  anyOf?: Schema; // 只要有一个匹配
-  allOf?: Schema; // 所有的都需要匹配
+  oneOf?: Schema[]; // 匹配给定的格式
+  anyOf?: Schema[]; // 只要有一个匹配
+  allOf?: Schema[]; // 所有的都需要匹配
   default?: any; // 默认值
+  additionalProperties?: any;
 }
 
 export const FieldPropType = {
@@ -51,7 +54,7 @@ export const FieldPropType = {
     required: true,
   },
   value: {
-    type: String as PropType<string>,
+    type: (Number || String) as PropType<number | string>,
     required: true,
   },
   onChange: {

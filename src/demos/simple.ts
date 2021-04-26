@@ -40,8 +40,8 @@ export default {
     },
   },
   default: {
-    firstName: '',
-    lastName: '',
+    firstName: 'David',
+    lastName: 'Beckham',
     telephone: 123456789,
   },
 };
