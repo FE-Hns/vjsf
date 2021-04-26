@@ -4,6 +4,7 @@ import { FieldPropType, SchemaTypes } from './types/type';
 import StringField from './components/StringField';
 import NumberField from './components/NumberField';
 import ObjectField from './components/ObjectField';
+import ArrayField from './components/ArrayField';
 
 export default defineComponent({
   name: 'SchemaFormItem',
@@ -25,6 +26,10 @@ export default defineComponent({
         }
         case SchemaTypes.OBJECT: {
           Component = ObjectField;
+          break;
+        }
+        case SchemaTypes.ARRAY: {
+          Component = ArrayField;
           break;
         }
         default:
