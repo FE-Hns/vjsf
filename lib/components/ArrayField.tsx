@@ -33,24 +33,28 @@ export default defineComponent({
       if (isStaticArray) {
         const items: Schema[] = schema.items as any;
         const arr = Array.isArray(value) ? value : [];
-        return items.map((schema: Schema, index: number) => (
-          <SchemaFormItem
-            schema={schema}
-            key={index}
-            value={arr[index]}
-            onChange={(v: any) => handleStaticArrayChange(v, index)}
-          />
-        ));
+        return items.map((schema: Schema, index: number) => {
+          return (
+            <SchemaFormItem
+              schema={schema}
+              key={index}
+              value={arr[index]}
+              onChange={(v: any) => handleStaticArrayChange(v, index)}
+            />
+          );
+        });
       } else if (!isMultiSelectArray) {
-        const items = Array.isArray(value) ? value : [];
-        return items.map((v: any, i: number) => (
-          <SchemaFormItem
-            schema={schema.items as any}
-            key={i}
-            value={v}
-            onChange={(v: any) => handleSingleTypeArrayChange(v, i)}
-          />
-        ));
+        const items: any[] = Array.isArray(value) ? value : [];
+        return items.map((v: any, i: number) => {
+          return (
+            <SchemaFormItem
+              schema={schema.items as any}
+              key={i}
+              value={v}
+              onChange={(v: any) => handleSingleTypeArrayChange(v, i)}
+            />
+          );
+        });
       } else {
         const items: any[] = (schema.items as any).enum;
         const options = items.map((v) => {

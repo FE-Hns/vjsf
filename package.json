@@ -5,6 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:core": "TYPE=lib vue-cli-service build --target lib --name index --no-clean lib/index.ts",
+    "build:theme": "TYPE=lib vue-cli-service build --target lib --name theme/index --no-clean lib/theme/index.ts",
+    "build:all": "rimraf dist && npm run build:core && npm run build:theme",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
@@ -16,6 +19,7 @@
     "jss-preset-default": "^10.6.0",
     "lodash.union": "^4.6.0",
     "monaco-editor-webpack-plugin": "^3.0.1",
+    "rimraf": "^2.7.1",
     "vue": "^3.0.0",
     "vue-jss": "^0.0.4"
   },

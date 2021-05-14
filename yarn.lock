@@ -4091,7 +4091,7 @@
     "pify" "^4.0.1"
     "rimraf" "^2.6.3"
 
-"del@^5.0.0":
+"del@^5.0.0", "del@^5.1.0":
   "integrity" "sha1-2Uh8lONnQQ5u/ykl7ljAyEp1s6c="
   "resolved" "https://registry.npm.taobao.org/del/download/del-5.1.0.tgz"
   "version" "5.1.0"
