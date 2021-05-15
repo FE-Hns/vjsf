@@ -17,7 +17,7 @@ export enum widgetName {
   NUMBERWIDGET = 'SelectionWidget',
 }
 
-export default defineComponent({
+const ThemeProvider = defineComponent({
   name: 'ThemeProvider',
   props: {
     theme: {
@@ -46,3 +46,4 @@ export function getWidget(name: widgetName) {
   });
   return widgetRef;
 }
+export default ThemeProvider;

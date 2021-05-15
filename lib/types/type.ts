@@ -88,8 +88,16 @@ export const SelectionWidgetPropDefine = {
 } as const;
 
 // 利用DefineComponent将对象转换为类型
-type CommonWidgetDefine = DefineComponent<typeof CommonWidgetPropDefine>;
-type SelectionWidgetDefine = DefineComponent<typeof SelectionWidgetPropDefine>;
+export type CommonWidgetDefine = DefineComponent<
+  typeof CommonWidgetPropDefine,
+  {},
+  {}
+>;
+export type SelectionWidgetDefine = DefineComponent<
+  typeof SelectionWidgetPropDefine,
+  {},
+  {}
+>;
 
 // 定义接口类型
 export interface Theme {

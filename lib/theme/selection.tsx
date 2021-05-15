@@ -1,24 +1,16 @@
 import { defineComponent, PropType, ref, watch } from 'vue';
+import {
+  SelectionWidgetPropDefine,
+  SelectionWidgetDefine,
+} from '../types/type';
 
 type option = {
   label: string;
   value: any;
 };
-export default defineComponent({
+const Selection: SelectionWidgetDefine = defineComponent({
   name: 'Selction',
-  props: {
-    value: {
-      required: true,
-    },
-    options: {
-      type: Array as PropType<option[]>,
-      required: true,
-    },
-    onChange: {
-      type: Function as PropType<(v: any) => void>,
-      required: true,
-    },
-  },
+  props: SelectionWidgetPropDefine,
   setup(props) {
     // 绑定的本地值
     const currentValue = ref(props.value);
@@ -52,3 +44,5 @@ export default defineComponent({
     };
   },
 });
+
+export default Selection;
