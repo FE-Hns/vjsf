@@ -6,9 +6,9 @@ export const SchemaFormItemContextKey = Symbol('SchemaFormItemContextKey');
 type SchemaFormItemType = DefineComponent<typeof FieldPropType>;
 
 export const getContext = () => {
-  const context:
-    | { SchemaFormItem: SchemaFormItemType; theme: Theme }
-    | undefined = inject(SchemaFormItemContextKey);
+  const context: { SchemaFormItem: SchemaFormItemType } | undefined = inject(
+    SchemaFormItemContextKey
+  );
   if (!context) {
     throw new Error('SchemaForm should be used');
   }

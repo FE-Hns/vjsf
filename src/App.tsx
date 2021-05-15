@@ -7,6 +7,7 @@ import demos from './demos/index';
 import SchemaForm from '../lib';
 
 import themeDefault from '../lib/theme/index';
+import ThemeProvider from '../lib/theme/ThemeProvider';
 
 const useStyles = createUseStyles({
   '@global': {
@@ -221,12 +222,13 @@ export default defineComponent({
                 </div>
               </div>
               <div class={classes.formWrapper}>
-                <SchemaForm
-                  theme={themeDefault as any}
-                  schema={demo.schema!}
-                  value={demo.data}
-                  onChange={handleOnChange}
-                />
+                <ThemeProvider theme={themeDefault as any}>
+                  <SchemaForm
+                    schema={demo.schema!}
+                    value={demo.data}
+                    onChange={handleOnChange}
+                  />
+                </ThemeProvider>
               </div>
             </div>
           </div>

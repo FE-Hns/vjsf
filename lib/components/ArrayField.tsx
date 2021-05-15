@@ -1,6 +1,7 @@
 import { defineComponent } from 'vue';
 import { FieldPropType, Schema } from '../types/type';
 import { getContext } from '../context';
+import { getWidget, widgetName } from '../theme/ThemeProvider';
 // import Selection from '../widget/selection';
 
 export default defineComponent({
@@ -8,6 +9,7 @@ export default defineComponent({
   props: FieldPropType,
   setup(props) {
     const context = getContext();
+    const contextRef = getWidget(widgetName.SELECTIONWIDGET);
 
     const handleStaticArrayChange = (val: any, index: number) => {
       const value = Array.isArray(props.value) ? props.value : [];
@@ -57,7 +59,8 @@ export default defineComponent({
         });
       } else {
         // 子孙组件通过theme来获取到对应的widget，这样就将子节点的渲染交给theme了
-        const Selection = context.theme.widgets.SelectionWidget;
+        // const Selection = context.theme.widgets.SelectionWidget;
+        const Selection = contextRef.value;
         const items: any[] = (schema.items as any).enum;
         const options = items.map((v) => {
           return {

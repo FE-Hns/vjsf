@@ -18,16 +18,11 @@ export default defineComponent({
       type: Function as PropType<(v: any) => void>,
       required: true,
     },
-    theme: {
-      type: Object as PropType<Theme>,
-      required: true,
-    },
   },
   setup(props) {
     // 将theme也通过provide的形式，向子孙组件传递过去
     const context = {
       SchemaFormItem,
-      theme: props.theme,
     };
     // 将组件向子孙组件传递
     provide(SchemaFormItemContextKey, context);
