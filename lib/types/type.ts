@@ -1,4 +1,4 @@
-import { PropType } from 'vue';
+import { DefineComponent, PropType } from 'vue';
 
 export enum SchemaTypes {
   'NUMBER' = 'number',
@@ -62,3 +62,40 @@ export const FieldPropType = {
     required: true,
   },
 } as const;
+
+// 定义通用的CommonWidget的prop类型
+export const CommonWidgetPropDefine = {
+  value: {
+    required: true,
+  },
+  onChange: {
+    type: Function as PropType<(v: any) => void>,
+    required: true,
+  },
+} as const;
+
+type option = {
+  label: string;
+  value: any;
+};
+// 定义SelectionWidget的prop类型
+export const SelectionWidgetPropDefine = {
+  ...CommonWidgetPropDefine,
+  options: {
+    type: Array as PropType<option[]>,
+    required: true,
+  },
+} as const;
+
+// 利用DefineComponent将对象转换为类型
+type CommonWidgetDefine = DefineComponent<typeof CommonWidgetPropDefine>;
+type SelectionWidgetDefine = DefineComponent<typeof SelectionWidgetPropDefine>;
+
+// 定义接口类型
+export interface Theme {
+  widgets: {
+    SelectionWidget: SelectionWidgetDefine;
+    TextWidget: CommonWidgetDefine;
+    NumberWidget: CommonWidgetDefine;
+  };
+}

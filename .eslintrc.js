@@ -22,6 +22,7 @@ module.exports = {
     'no-prototype-builtins': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     'prefer-const': 'off',
+    '@typescript-eslint/ban-types': 'off',
   },
   overrides: [
     {

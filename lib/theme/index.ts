@@ -1,3 +1,10 @@
-import ThemeDefault from './ThemeDefault';
+// import ThemeDefault from './ThemeDefault';
+import SelectionWidget from './selection';
 
-export default ThemeDefault;
+export default {
+  widgets: {
+    SelectionWidget,
+    TextWidget: SelectionWidget,
+    NumberWidget: SelectionWidget,
+  },
+};

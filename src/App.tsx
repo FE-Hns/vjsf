@@ -4,7 +4,9 @@ import { toJSONString } from '../lib/utils/index';
 import { createUseStyles } from 'vue-jss';
 import { Schema } from '../lib/types/type';
 import demos from './demos/index';
-import SchemaForm from '../lib/SchemaForm';
+import SchemaForm from '../lib';
+
+import themeDefault from '../lib/theme/index';
 
 const useStyles = createUseStyles({
   '@global': {
@@ -220,6 +222,7 @@ export default defineComponent({
               </div>
               <div class={classes.formWrapper}>
                 <SchemaForm
+                  theme={themeDefault as any}
                   schema={demo.schema!}
                   value={demo.data}
                   onChange={handleOnChange}

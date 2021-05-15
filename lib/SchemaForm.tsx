@@ -1,14 +1,33 @@
 import { defineComponent, PropType, provide } from 'vue';
-import { Schema, FieldPropType } from './types/type';
-import SchemaFormItem from './SchemaFormItem';
+import { Schema, Theme } from './types/type';
+import { SchemaFormItem } from './index';
 import { SchemaFormItemContextKey } from './context';
 
 export default defineComponent({
   name: 'SchemaForm',
-  props: FieldPropType,
+  props: {
+    schema: {
+      type: Object as PropType<Schema>,
+      required: true,
+    },
+    value: {
+      type: (Number || String) as PropType<number | string>,
+      required: true,
+    },
+    onChange: {
+      type: Function as PropType<(v: any) => void>,
+      required: true,
+    },
+    theme: {
+      type: Object as PropType<Theme>,
+      required: true,
+    },
+  },
   setup(props) {
+    // 将theme也通过provide的形式，向子孙组件传递过去
     const context = {
       SchemaFormItem,
+      theme: props.theme,
     };
     // 将组件向子孙组件传递
     provide(SchemaFormItemContextKey, context);
