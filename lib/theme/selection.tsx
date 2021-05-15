@@ -8,6 +8,7 @@ type option = {
   label: string;
   value: any;
 };
+// 为了解决定义的问题，所以改成这种方式 利用 SelectionWidgetDefine 设置类型
 const Selection: SelectionWidgetDefine = defineComponent({
   name: 'Selction',
   props: SelectionWidgetPropDefine,

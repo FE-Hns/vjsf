@@ -1,5 +1,5 @@
 // import ThemeDefault from './ThemeDefault';
-import SelectionWidget from './selection';
+import SelectionWidget from './Selection';
 import { defineComponent } from 'vue';
 import { CommonWidgetPropDefine, CommonWidgetDefine } from '../types/type';
 
