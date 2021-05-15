@@ -8,14 +8,9 @@ import {
   provide,
 } from 'vue';
 import { Theme } from '../types/type';
+import { SelectionWidgetNames, CommonWidgetNames } from '../types/type';
 
 const THEME_PROVIDER_KEY = Symbol();
-
-export enum widgetName {
-  SELECTIONWIDGET = 'SelectionWidget',
-  TEXTWIDGET = 'SelectionWidget',
-  NUMBERWIDGET = 'SelectionWidget',
-}
 
 const ThemeProvider = defineComponent({
   name: 'ThemeProvider',
@@ -34,7 +29,9 @@ const ThemeProvider = defineComponent({
   },
 });
 
-export function getWidget(name: widgetName) {
+export function getWidget<T extends SelectionWidgetNames | CommonWidgetNames>(
+  name: T
+) {
   const context: ComputedRef<Theme> | undefined = inject<ComputedRef<Theme>>(
     THEME_PROVIDER_KEY
   );

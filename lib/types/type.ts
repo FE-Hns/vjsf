@@ -99,11 +99,20 @@ export type SelectionWidgetDefine = DefineComponent<
   {}
 >;
 
+export enum SelectionWidgetNames {
+  SELECTIONWIDGET = 'SelectionWidget',
+}
+
+export enum CommonWidgetNames {
+  TEXTWIDGET = 'TextWidget',
+  NUMBERWIDGET = 'NumberWidget',
+}
+
 // 定义接口类型
 export interface Theme {
   widgets: {
-    SelectionWidget: SelectionWidgetDefine;
-    TextWidget: CommonWidgetDefine;
-    NumberWidget: CommonWidgetDefine;
+    [SelectionWidgetNames.SELECTIONWIDGET]: SelectionWidgetDefine;
+    [CommonWidgetNames.TEXTWIDGET]: CommonWidgetDefine;
+    [CommonWidgetNames.NUMBERWIDGET]: CommonWidgetDefine;
   };
 }

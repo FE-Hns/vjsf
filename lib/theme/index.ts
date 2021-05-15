@@ -12,7 +12,6 @@ const CommonWidget: CommonWidgetDefine = defineComponent({
     };
   },
 });
-
 export default {
   widgets: {
     SelectionWidget,

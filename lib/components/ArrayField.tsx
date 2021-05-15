@@ -1,7 +1,8 @@
 import { defineComponent } from 'vue';
 import { FieldPropType, Schema } from '../types/type';
 import { getContext } from '../context';
-import { getWidget, widgetName } from '../theme/ThemeProvider';
+import { getWidget } from '../theme/ThemeProvider';
+import { SelectionWidgetNames } from '../types/type';
 // import Selection from '../widget/selection';
 
 export default defineComponent({
@@ -9,7 +10,7 @@ export default defineComponent({
   props: FieldPropType,
   setup(props) {
     const context = getContext();
-    const contextRef = getWidget(widgetName.SELECTIONWIDGET);
+    const contextRef = getWidget(SelectionWidgetNames.SELECTIONWIDGET);
 
     const handleStaticArrayChange = (val: any, index: number) => {
       const value = Array.isArray(props.value) ? props.value : [];
