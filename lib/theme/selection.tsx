@@ -1,4 +1,5 @@
 import { defineComponent, PropType, ref, watch } from 'vue';
+
 import {
   SelectionWidgetPropDefine,
   SelectionWidgetDefine,
