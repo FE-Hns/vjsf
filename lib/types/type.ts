@@ -66,6 +66,7 @@ export const FieldPropType = {
 // 定义通用的CommonWidget的prop类型
 export const CommonWidgetPropDefine = {
   value: {
+    type: (Number || String) as PropType<number | string>,
     required: true,
   },
   onChange: {

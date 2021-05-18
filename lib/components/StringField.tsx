@@ -1,14 +1,15 @@
-import { defineComponent, inject, ref, watch, DefineComponent } from 'vue';
+import { defineComponent } from 'vue';
 import { FieldPropType } from '../types/type';
-import { SchemaFormItemContextKey } from '../context';
+import { getWidget } from '../theme/ThemeProvider';
+import { CommonWidgetNames } from '../types/type';
 
 export default defineComponent({
   name: 'StringField',
   props: FieldPropType,
   setup(props) {
-    const handleOnChange = (e: any) => {
-      props.onChange(e.target.value);
-    };
+    // const handleOnChange = (e: any) => {
+    //   props.onChange(e.target.value);
+    // };
     // // v-model绑定本组件的localValue
     // const localValueRef = ref(props.value);
 
@@ -29,8 +30,12 @@ export default defineComponent({
     //   }
     // );
 
+    const widgetRef = getWidget(CommonWidgetNames.TEXTWIDGET);
+    const TextWidget = widgetRef.value;
+
     return () => {
-      return <input type="text" value={props.value} onInput={handleOnChange} />;
+      // return <input type="text" value={props.value} onInput={handleOnChange} />;
+      return <TextWidget value={props.value} onChange={props.onChange} />;
       // v-model绑定ref.value才会触发
       // return <input type="text" v-model={localValueRef.value} />;
     };

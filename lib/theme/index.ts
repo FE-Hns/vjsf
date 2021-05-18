@@ -1,21 +1,11 @@
-// import ThemeDefault from './ThemeDefault';
-import SelectionWidget from './Selection';
-import { defineComponent } from 'vue';
-import { CommonWidgetPropDefine, CommonWidgetDefine } from '../types/type';
+import SelectionWidget from './SelectionWidget';
+import TextWidget from './TextWidget';
+import NumberWidget from './NumberWidget';
 
-const CommonWidget: CommonWidgetDefine = defineComponent({
-  name: 'CommonWidget',
-  props: CommonWidgetPropDefine,
-  setup() {
-    return () => {
-      return null;
-    };
-  },
-});
 export default {
   widgets: {
     SelectionWidget,
-    TextWidget: CommonWidget,
-    NumberWidget: CommonWidget,
+    TextWidget: TextWidget,
+    NumberWidget: NumberWidget,
   },
 };
