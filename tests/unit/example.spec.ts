@@ -16,8 +16,7 @@ describe('SchemaForm', () => {
         },
       },
     });
-    // expect(wrapper.text()).toMatch(msg);
-    const numberField = wrapper.find(NumberField as any);
+    const numberField = wrapper.findComponent(NumberField);
     expect(numberField.exists()).toBeTruthy();
   });
 });
