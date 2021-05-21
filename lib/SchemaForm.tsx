@@ -1,7 +1,27 @@
-import { defineComponent, PropType, provide, Ref } from 'vue';
+import {
+  defineComponent,
+  PropType,
+  provide,
+  Ref,
+  shallowRef,
+  watch,
+  watchEffect,
+} from 'vue';
 import { Schema, Theme } from './types/type';
 import { SchemaFormItem } from './index';
 import { SchemaFormItemContextKey } from './context';
+import Ajv, { Options } from 'ajv';
+
+interface ContextRef {
+  doValidate: () => {
+    errors: any[];
+    valid: boolean;
+  };
+}
+
+const defaultOptions: Options = {
+  allErrors: true,
+};
 
 export default defineComponent({
   name: 'SchemaForm',
@@ -19,7 +39,10 @@ export default defineComponent({
       required: true,
     },
     contextRef: {
-      // type: Object as PropType<>
+      type: Object as PropType<Ref<ContextRef>>,
+    },
+    ajvOptions: {
+      type: Object as PropType<Options>,
     },
   },
   setup(props) {
@@ -27,6 +50,41 @@ export default defineComponent({
     const context = {
       SchemaFormItem,
     };
+
+    const validatorRef: Ref<Ajv> = shallowRef() as any;
+
+    watchEffect(() => {
+      validatorRef.value = new Ajv({
+        ...defaultOptions,
+        ...props.ajvOptions,
+      });
+    });
+
+    watch(
+      () => props.contextRef,
+      () => {
+        // 由于props.contextRef可能不存在
+        if (props.contextRef) {
+          props.contextRef.value = {
+            doValidate() {
+              console.log('===================>');
+              const valid = validatorRef.value.validate(
+                props.schema,
+                props.value
+              );
+              return {
+                errors: validatorRef.value.errors || [],
+                valid: valid,
+              };
+            },
+          };
+        }
+      },
+      {
+        immediate: true,
+      }
+    );
+
     // 将组件向子孙组件传递
     provide(SchemaFormItemContextKey, context);
     return () => {

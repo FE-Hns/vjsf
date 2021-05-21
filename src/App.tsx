@@ -173,6 +173,8 @@ export default defineComponent({
       demo.dataCode = toJSONString(value);
     };
 
+    const contextRef = ref();
+
     return () => {
       const classes = classRef.value;
       const selectedValue = selectedRef.value;
@@ -227,7 +229,13 @@ export default defineComponent({
                     schema={demo.schema!}
                     value={demo.data}
                     onChange={handleOnChange}
+                    contextRef={contextRef}
                   />
+                  <button
+                    onClick={() => console.log(contextRef.value.doValidate())}
+                  >
+                    校 验
+                  </button>
                 </ThemeProvider>
               </div>
             </div>
