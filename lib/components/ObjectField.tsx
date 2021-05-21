@@ -20,7 +20,7 @@ export default defineComponent({
     };
     return () => {
       const SchemaFormItem = context?.SchemaFormItem;
-      const { schema, value } = props;
+      const { schema, value, uiSchema } = props;
       const properties = schema.properties || {};
       const currentValue: any = isObject(value) ? value : {};
       return Object.keys(properties).map((k, i) => {
@@ -28,6 +28,7 @@ export default defineComponent({
         return (
           <SchemaFormItem
             schema={properties[k]}
+            uiSchema={uiSchema.properties ? uiSchema.properties[k] || {} : {}}
             key={i}
             value={currentValue[k]}
             onChange={(v: any) => handleOnChange(v, k)}

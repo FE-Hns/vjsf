@@ -2,7 +2,7 @@ import { defineComponent, reactive, Ref, ref, watchEffect } from 'vue';
 import MonacoEditor from './components/MonacoEditor';
 import { toJSONString } from '../lib/utils/index';
 import { createUseStyles } from 'vue-jss';
-import { Schema } from '../lib/types/type';
+import { Schema, UISchema } from '../lib/types/type';
 import demos from './demos/index';
 import SchemaForm from '../lib';
 
@@ -95,7 +95,7 @@ export default defineComponent({
     // 3. data-editor对应的结构
     const demo: {
       schema: Schema | null;
-      uiSchema: Schema | null;
+      uiSchema: UISchema | null;
       data: any;
       schemaCode: string;
       uiSchemaCode: string;
@@ -227,15 +227,11 @@ export default defineComponent({
                 <ThemeProvider theme={themeDefault}>
                   <SchemaForm
                     schema={demo.schema!}
+                    uiSchema={demo.uiSchema!}
                     value={demo.data}
                     onChange={handleOnChange}
                     contextRef={contextRef}
                   />
-                  <button
-                    onClick={() => console.log(contextRef.value.doValidate())}
-                  >
-                    校 验
-                  </button>
                 </ThemeProvider>
               </div>
             </div>

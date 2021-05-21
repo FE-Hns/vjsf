@@ -7,7 +7,7 @@ import {
   watch,
   watchEffect,
 } from 'vue';
-import { Schema, Theme } from './types/type';
+import { Schema, Theme, UISchema } from './types/type';
 import { SchemaFormItem } from './index';
 import { SchemaFormItemContextKey } from './context';
 import Ajv, { Options } from 'ajv';
@@ -43,6 +43,10 @@ export default defineComponent({
     },
     ajvOptions: {
       type: Object as PropType<Options>,
+    },
+    uiSchema: {
+      type: Object as PropType<UISchema>,
+      required: true,
     },
   },
   setup(props) {
@@ -92,6 +96,7 @@ export default defineComponent({
         <div>
           <SchemaFormItem
             schema={props.schema}
+            uiSchema={props.uiSchema}
             onChange={props.onChange}
             value={props.value}
           />

@@ -48,6 +48,14 @@ export interface Schema {
   additionalProperties?: any;
 }
 
+export interface UISchema {
+  widget?: string | CommonWidgetDefine;
+  properties?: {
+    [key: string]: UISchema;
+  };
+  items?: UISchema | UISchema[];
+}
+
 export const FieldPropType = {
   schema: {
     type: Object as PropType<Schema>,
@@ -59,6 +67,10 @@ export const FieldPropType = {
   },
   onChange: {
     type: Function as PropType<(v: any) => void>,
+    required: true,
+  },
+  uiSchema: {
+    type: Object as PropType<UISchema>,
     required: true,
   },
 } as const;

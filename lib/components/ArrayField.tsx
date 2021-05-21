@@ -29,7 +29,7 @@ export default defineComponent({
     };
 
     return () => {
-      const { schema, value } = props;
+      const { schema, value, uiSchema } = props;
       const SchemaFormItem = context.SchemaFormItem;
       const isStaticArray = Array.isArray(schema.items);
       const isMultiSelectArray = schema.items && (schema.items as any).enum;
@@ -37,9 +37,14 @@ export default defineComponent({
         const items: Schema[] = schema.items as any;
         const arr = Array.isArray(value) ? value : [];
         return items.map((schema: Schema, index: number) => {
+          const itemUiSchema = uiSchema.items;
+          const us = Array.isArray(itemUiSchema)
+            ? itemUiSchema[index] || {}
+            : itemUiSchema || {};
           return (
             <SchemaFormItem
               schema={schema}
+              uiSchema={us}
               key={index}
               value={arr[index]}
               onChange={(v: any) => handleStaticArrayChange(v, index)}
@@ -52,6 +57,7 @@ export default defineComponent({
           return (
             <SchemaFormItem
               schema={schema.items as any}
+              uiSchema={(uiSchema.items as any) || {}}
               key={i}
               value={v}
               onChange={(v: any) => handleSingleTypeArrayChange(v, i)}
